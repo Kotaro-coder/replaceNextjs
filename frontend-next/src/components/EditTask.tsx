@@ -12,7 +12,7 @@ import { TaskStatus } from '../types/taskStatus';
 import { useMutation } from '@apollo/client';
 import { UPDATE_TASK } from '../mutations/taskMutations';
 import { GET_TASKS } from '../queries/taskQueries';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 export default function EditTask({ task, userId }: { task: Task, userId: number}) {
   const [open, setOpen] = useState(false);
@@ -22,7 +22,7 @@ export default function EditTask({ task, userId }: { task: Task, userId: number}
   const [description, setDescription] = useState(task.description);
   const [isInvalidName, setIsInvalidName] = useState(false);
   const [isInvalidDueDate, setIsInvalidDueDate] = useState(false);
-  const navigate = useNavigate();
+  const navigate = useRouter();
   const [updateTask] = useMutation<{updateTask: Task}>(UPDATE_TASK);
   const resetState = () => {
     setName(task.name);

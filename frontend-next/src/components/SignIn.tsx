@@ -13,7 +13,7 @@ import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { SignInResponse } from '../types/signInResponse';
 import { SIGN_IN } from '../mutations/authMutations';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 const theme = createTheme();
 
@@ -22,7 +22,7 @@ export default function SignIn() {
   const [password, setPassword] = useState('');
   const [failSignIn, setFailSignIn] = useState(false);
   const [signIn] = useMutation<SignInResponse>(SIGN_IN);
-  const navigate = useNavigate();
+  const navigate = useRouter();
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const signInInput = {email, password};

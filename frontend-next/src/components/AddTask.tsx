@@ -9,7 +9,7 @@ import { useMutation } from '@apollo/client';
 import { CREATE_TASK } from '../mutations/taskMutations';
 import { Task } from '../types/task';
 import { GET_TASKS } from '../queries/taskQueries';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 export default function AddTask({ userId }: {userId: number}) {
   const [open, setOpen] = useState(false);
@@ -19,7 +19,7 @@ export default function AddTask({ userId }: {userId: number}) {
   const [isInvalidName, setIsInvalidName] = useState(false);
   const [isInvalidDueDate, setIsInvalidDueDate] = useState(false);
   const [createTask] = useMutation<{createTask: Task}>(CREATE_TASK);
-  const navigate = useNavigate();
+  const navigate = useRouter();
   
   const resetState = () => {
     setName('');

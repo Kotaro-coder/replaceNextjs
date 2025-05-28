@@ -3,11 +3,11 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 
 export default function Header() {
-    const navigate = useNavigate();
+    const navigate = useRouter();
     const handleLogout = () => {
         localStorage.removeItem('token');
         navigate('/signin');

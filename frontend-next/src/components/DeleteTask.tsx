@@ -3,11 +3,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useMutation } from "@apollo/client";
 import { DELETE_TASK } from "../mutations/taskMutations";
 import { GET_TASKS } from "../queries/taskQueries";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 
 const DeleteTask = ({ id, userId }: { id: number, userId: number}) => {
   const [deleteTask] = useMutation<{deleteTask: number}>(DELETE_TASK);
-  const navigate = useNavigate();
+  const navigate = useRouter();
   const handleDeleteTask = async () => {
     try {
         await deleteTask({

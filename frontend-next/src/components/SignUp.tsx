@@ -15,7 +15,7 @@ import { useMutation } from '@apollo/client';
 import { SIGN_IN, SIGN_UP } from '../mutations/authMutations';
 import { User } from '../types/user';
 import { SignInResponse } from '../types/signInResponse';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 const theme = createTheme();
 
@@ -25,7 +25,7 @@ export default function SignUp() {
   const [password, setPassword] = useState('');
   const [signUp] = useMutation<{createUser: User}>(SIGN_UP);
   const [signIn] = useMutation<SignInResponse>(SIGN_IN);
-  const navigate = useNavigate();
+  const navigate = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
