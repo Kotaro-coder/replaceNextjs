@@ -19,7 +19,7 @@ export default function AddTask({ userId }: {userId: number}) {
   const [isInvalidName, setIsInvalidName] = useState(false);
   const [isInvalidDueDate, setIsInvalidDueDate] = useState(false);
   const [createTask] = useMutation<{createTask: Task}>(CREATE_TASK);
-  const navigate = useRouter();
+  const router = useRouter();
   
   const resetState = () => {
     setName('');
@@ -59,7 +59,7 @@ export default function AddTask({ userId }: {userId: number}) {
             if (err.message === 'Unauthorized') {
                 localStorage.removeItem('token');
                 alert('トークンの有効期限が切れました。サインイン画面に遷移します。')
-                navigate('/signin');
+                router.push('/signin');
                 return;
             }
 

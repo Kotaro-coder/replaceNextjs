@@ -1,3 +1,5 @@
+'use client';
+
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -7,10 +9,10 @@ import { useRouter } from 'next/navigation';
 
 
 export default function Header() {
-    const navigate = useRouter();
+    const router = useRouter();
     const handleLogout = () => {
         localStorage.removeItem('token');
-        navigate('/signin');
+        router.push('/signin');
     }
     return (
     <Box sx={{ flexGrow: 1 }}>

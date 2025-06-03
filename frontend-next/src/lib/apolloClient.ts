@@ -6,6 +6,11 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, prevContext) => {
+    if (typeof window === 'undefined') {
+    // SSR: そのまま headers を返す
+    return { headers: prevContext.headers };
+  }
+  
     const token = localStorage.getItem('token');
     return {
         headers: {

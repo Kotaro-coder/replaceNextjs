@@ -1,3 +1,5 @@
+'use client';
+
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -12,9 +14,9 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { SIGN_IN, SIGN_UP } from '../mutations/authMutations';
-import { User } from '../types/user';
-import { SignInResponse } from '../types/signInResponse';
+import { SIGN_IN, SIGN_UP } from '@/mutations/authMutations';
+import { User } from '@/types/user';
+import { SignInResponse } from '@/types/signInResponse';
 import { useRouter } from 'next/navigation';
 
 const theme = createTheme();
@@ -25,7 +27,7 @@ export default function SignUp() {
   const [password, setPassword] = useState('');
   const [signUp] = useMutation<{createUser: User}>(SIGN_UP);
   const [signIn] = useMutation<SignInResponse>(SIGN_IN);
-  const navigate = useRouter();
+  const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -43,7 +45,7 @@ export default function SignUp() {
         if (result.data) {
           localStorage.setItem('token', result.data.signIn.accessToken);
         }
-        localStorage.getItem('token') && navigate('/');
+        localStorage.getItem('token') && router.push('/');
       }
     } catch(err: any) {
       alert('ユーザーの作成に失敗しました');

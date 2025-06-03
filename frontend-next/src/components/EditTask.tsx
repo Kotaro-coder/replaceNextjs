@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -7,14 +9,15 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { FormControl, IconButton, InputLabel, MenuItem, Select, Tooltip } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
-import { Task } from '../types/task';
-import { TaskStatus } from '../types/taskStatus';
+import { Task } from '@/types/task';
+import { TaskStatus } from '@/types/taskStatus';
 import { useMutation } from '@apollo/client';
-import { UPDATE_TASK } from '../mutations/taskMutations';
-import { GET_TASKS } from '../queries/taskQueries';
+import { UPDATE_TASK } from '@/mutations/taskMutations';
+import { GET_TASKS } from '@/queries/taskQueries';
 import { useRouter } from 'next/navigation';
 
 export default function EditTask({ task, userId }: { task: Task, userId: number}) {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [name, setName] = useState(task.name);
   const [dueDate, setDueDate] = useState(task.dueDate);
@@ -22,8 +25,8 @@ export default function EditTask({ task, userId }: { task: Task, userId: number}
   const [description, setDescription] = useState(task.description);
   const [isInvalidName, setIsInvalidName] = useState(false);
   const [isInvalidDueDate, setIsInvalidDueDate] = useState(false);
-  const navigate = useRouter();
   const [updateTask] = useMutation<{updateTask: Task}>(UPDATE_TASK);
+
   const resetState = () => {
     setName(task.name);
     setDueDate(task.dueDate);
@@ -63,7 +66,7 @@ export default function EditTask({ task, userId }: { task: Task, userId: number}
                 if (err.message === 'Unauthorized') {
                     localStorage.removeItem('token');
                     alert('トークンの有効期限が切れました。サインイン画面に遷移します。')
-                    navigate('/signin');
+                    router.push('/signin');
                     return;
                 }
     

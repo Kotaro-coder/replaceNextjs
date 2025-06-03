@@ -1,13 +1,14 @@
+'use client';
 import { IconButton, Tooltip } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useMutation } from "@apollo/client";
-import { DELETE_TASK } from "../mutations/taskMutations";
-import { GET_TASKS } from "../queries/taskQueries";
+import { DELETE_TASK } from "@/mutations/taskMutations";
+import { GET_TASKS } from "@/queries/taskQueries";
 import { useRouter } from "next/navigation";
 
 const DeleteTask = ({ id, userId }: { id: number, userId: number}) => {
   const [deleteTask] = useMutation<{deleteTask: number}>(DELETE_TASK);
-  const navigate = useRouter();
+  const router = useRouter();
   const handleDeleteTask = async () => {
     try {
         await deleteTask({
@@ -19,7 +20,7 @@ const DeleteTask = ({ id, userId }: { id: number, userId: number}) => {
         if(err.message === 'Unauthorized') {
             localStorage.removeItem('token');
             alert('トークンの有効期限が切れました。サインイン画面に遷移します。')
-            navigate('/signin');
+            router.push('/signin');
             return;
         }
         alert('タスクの削除に失敗しました');

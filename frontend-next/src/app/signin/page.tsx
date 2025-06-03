@@ -1,3 +1,4 @@
+'use client';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,8 +12,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { SignInResponse } from '../types/signInResponse';
-import { SIGN_IN } from '../mutations/authMutations';
+import { SignInResponse } from '@/types/signInResponse';
+import { SIGN_IN } from '@/mutations/authMutations';
 import { useRouter } from 'next/navigation';
 
 const theme = createTheme();
@@ -22,7 +23,7 @@ export default function SignIn() {
   const [password, setPassword] = useState('');
   const [failSignIn, setFailSignIn] = useState(false);
   const [signIn] = useMutation<SignInResponse>(SIGN_IN);
-  const navigate = useRouter();
+  const router = useRouter();
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const signInInput = {email, password};
@@ -33,7 +34,7 @@ export default function SignIn() {
       if (result.data) {
         localStorage.setItem('token', result.data.signIn.accessToken)
       }
-      localStorage.getItem('token') && navigate('/');
+      localStorage.getItem('token') && router.push('/');
     } catch(err: any) {
       if (err.message === 'Unauthorized') {
         setFailSignIn(true);
