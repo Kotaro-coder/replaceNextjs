@@ -5,6 +5,7 @@ import { UpdateProfileInput } from './dto/updateProfile.input';
 import { ProfileService } from './profile.service';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { Profile as PrismaProfile } from '@prisma/client';
 
 @Resolver()
 export class ProfileResolver {
@@ -14,7 +15,7 @@ export class ProfileResolver {
   @UseGuards(JwtAuthGuard)
   async getProfile(
     @Args('userId', { type: () => Int }) userId: number,
-  ): Promise<Profile[]> {
+  ): Promise<PrismaProfile[]> {
     return await this.profileService.getProfile(userId);
   }
 
@@ -22,7 +23,7 @@ export class ProfileResolver {
   @UseGuards(JwtAuthGuard)
   async createProfile(
     @Args('createProfileInput') createProfileInput: CreateProfileInput,
-  ): Promise<Profile> {
+  ): Promise<PrismaProfile> {
     return this.profileService.createProfile(createProfileInput);
   }
 
@@ -30,7 +31,7 @@ export class ProfileResolver {
   @UseGuards(JwtAuthGuard)
   async updateProfile(
     @Args('updateProfileInput') updateProfileInput: UpdateProfileInput,
-  ): Promise<Profile> {
+  ): Promise<PrismaProfile> {
     return await this.profileService.updateProfile(updateProfileInput);
   }
 }

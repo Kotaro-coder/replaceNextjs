@@ -45,8 +45,8 @@ model User {
 model Profile {
   id          Int @id @default(autoincrement())
   displayName String @db.VarChar(255)
-  bio         String? @db.VarChar(255)
-  goal        String? @db.VarChar(255)
+  bio         String? 
+  goal        String? 
   createdAt   DateTime @default(now()) @db.Timestamp(0)
   updatedAt   DateTime @updatedAt @db.Timestamp(0)
   userId      Int 

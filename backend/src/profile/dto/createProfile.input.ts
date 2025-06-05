@@ -7,11 +7,11 @@ export class CreateProfileInput {
   @IsNotEmpty()
   displayName: string;
 
-  @Field({ nullable: true })
-  bio?: string;
+  @Field(() => String, { nullable: true })
+  bio?: string | null;
 
-  @Field({ nullable: true })
-  goal?: string;
+  @Field(() => String, { nullable: true })
+  goal?: string | null;
 
   @Field(() => Int)
   userId: number;
