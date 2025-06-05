@@ -39,4 +39,16 @@ model User {
   createdAt DateTime @default(now()) @db.Timestamp(0)
   updatedAt DateTime @updatedAt @db.Timestamp(0)
   task      Task[]
+  profile   Profile[]
+}
+
+model Profile {
+  id          Int @id @default(autoincrement())
+  displayName String @db.VarChar(255)
+  bio         String? @db.VarChar(255)
+  goal        String? @db.VarChar(255)
+  createdAt   DateTime @default(now()) @db.Timestamp(0)
+  updatedAt   DateTime @updatedAt @db.Timestamp(0)
+  userId      Int 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
