@@ -11,11 +11,11 @@ import { Profile as PrismaProfile } from '@prisma/client';
 export class ProfileResolver {
   constructor(private readonly profileService: ProfileService) {}
 
-  @Query(() => [Profile], { nullable: 'items' })
+  @Query(() => Profile, { nullable: true })
   @UseGuards(JwtAuthGuard)
   async getProfile(
     @Args('userId', { type: () => Int }) userId: number,
-  ): Promise<PrismaProfile[]> {
+  ): Promise<PrismaProfile | null> {
     return await this.profileService.getProfile(userId);
   }
 

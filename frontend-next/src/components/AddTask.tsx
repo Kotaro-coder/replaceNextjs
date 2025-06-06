@@ -53,7 +53,7 @@ export default function AddTask({ userId }: {userId: number}) {
         try {
           await createTask({
             variables: { createTaskInput },
-            refetchQueries: [{query: GET_TASKS, variables: { userId}}],
+            refetchQueries: [{query: GET_TASKS, variables: { userId }}],
           })
           resetState();
           setOpen(false);

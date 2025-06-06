@@ -49,6 +49,6 @@ model Profile {
   goal        String? 
   createdAt   DateTime @default(now()) @db.Timestamp(0)
   updatedAt   DateTime @updatedAt @db.Timestamp(0)
-  userId      Int 
+  userId      Int @unique
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

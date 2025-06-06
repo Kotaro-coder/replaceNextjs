@@ -8,8 +8,8 @@ import { Profile as PrismaProfile } from '@prisma/client';
 export class ProfileService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async getProfile(userId: number): Promise<PrismaProfile[]> {
-    return this.prismaService.profile.findMany({
+  async getProfile(userId: number): Promise<PrismaProfile | null> {
+    return this.prismaService.profile.findFirst({
       where: { userId },
     });
   }
