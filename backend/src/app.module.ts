@@ -7,6 +7,8 @@ import { PrismaModule } from './prisma/prisma.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { ProfileModule } from './profile/profile.module';
+import { PostModule } from './post/post.modules';
+
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
@@ -18,6 +20,7 @@ import { ProfileModule } from './profile/profile.module';
     PrismaModule,
     UserModule,
     ProfileModule,
+    PostModule,
     AuthModule,
   ],
 })

@@ -39,10 +39,19 @@ type Profile {
   updatedAt: DateTime!
 }
 
+type Post {
+  id: Int!
+  description: String
+  type: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type Query {
   getTasks(userId: Int!): [Task]!
   getUser(email: String!): User
   getProfile(userId: Int!): Profile
+  getPost(userId: Int!): [Post!]
 }
 
 type Mutation {
@@ -52,6 +61,9 @@ type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   createProfile(createProfileInput: CreateProfileInput!): Profile!
   updateProfile(updateProfileInput: UpdateProfileInput!): Profile!
+  createPost(createPost: CreatePostInput!): Post!
+  updatePost(updatePostInput: UpdatePostInput!): Post!
+  deletePost(id: Int!): Post!
   signIn(signInInput: SignInInput!): SignInResponse!
 }
 
@@ -88,6 +100,18 @@ input UpdateProfileInput {
   displayName: String
   bio: String
   goal: String
+}
+
+input CreatePostInput {
+  description: String
+  type: String!
+  userId: Int!
+}
+
+input UpdatePostInput {
+  id: Int!
+  description: String
+  type: String!
 }
 
 input SignInInput {

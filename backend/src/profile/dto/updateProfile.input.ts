@@ -8,6 +8,7 @@ export class UpdateProfileInput {
 
   @Field({ nullable: true })
   @IsNotEmpty()
+  @IsOptional()
   displayName?: string;
 
   @Field(() => String, { nullable: true })
